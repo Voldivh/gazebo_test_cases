@@ -5,7 +5,7 @@ translation_map:
   fastdds: 'FastDDS'
   dds: 'DDS vendor'
 sets:
-  # Makes everything but install files and READMEs
+  # Makes everything but install files and sdf worlds
   - filters:
       - isMatch: true
         labels:
@@ -13,42 +13,82 @@ sets:
       - isMatch: false
         name: install
       - isMatch: false
-        name: README
+        name: src
+      - isMatch: false
+        labels:
+          - sdf worlds
     dimensions:
       os:
-        - Ubuntu Focal
         - Ubuntu Jammy
       buildType:
         - Binary
-  # Makes the READMEs only once
+        - Source
+  # Makes only the sdf worlds once
   - filters:
       - isMatch: true
         labels:
           - harmonic
-      - isMatch: false
-        name: install
       - isMatch: true
-        name: README
+        labels:
+          - sdf worlds
     dimensions:
       os:
-        - Ubuntu Focal
+        - Ubuntu Jammy
       buildType:
         - Binary
   #####################
-  # INSTALL FROM BINARIES
+  # INSTALL FROM SOURCE
   #####################
-  # Install on Ubuntu from binaries
+  # Install on Ubuntu from source
   - filters:
       - isMatch: true
         labels:
           - harmonic
       - isMatch: true
         name: ubuntu
-      - isMatch: false
+      - isMatch: true
         name: src
+      - isMatch: true
+        labels:
+          - docs
     dimensions:
       os:
-        - Ubuntu Focal
         - Ubuntu Jammy
+      buildType:
+        - Source
+  # Install on MacOS from source
+  - filters:
+      - isMatch: true
+        labels:
+          - harmonic
+      - isMatch: true
+        name: osx
+      - isMatch: true
+        name: src
+      - isMatch: true
+        labels:
+          - docs
+    dimensions:
+      os:
+        - MacOS
+      buildType:
+        - Source
+  #####################
+  # INSTALL FROM BINARIES
+  #####################
+  - filters:
+      - isMatch: true
+        labels:
+          - harmonic
+      - isMatch: false
+        name: src
+      - isMatch: true
+        labels:
+          - docs
+    dimensions:
+      os:
+        - Ubuntu Jammy
+        - MacOS
+        - Windows
       buildType:
         - Binary
