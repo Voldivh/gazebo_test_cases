@@ -51,6 +51,7 @@ sets:
     dimensions:
       os:
         - Ubuntu Jammy
+        - MacOS
       buildType:
         - Binary
   #####################
@@ -110,6 +111,7 @@ sets:
   #####################
   # INSTALL FROM BINARIES
   #####################
+  # Install on Ubuntu from binaries
   - filters:
       - isMatch: true
         labels:
@@ -119,11 +121,31 @@ sets:
       - isMatch: true
         name: install
       - isMatch: true
+        name: ubuntu
+      - isMatch: true
         labels:
           - docs
     dimensions:
       os:
         - Ubuntu Jammy
+      buildType:
+        - Binary
+  # Install on MacOS from binaries
+  - filters:
+      - isMatch: true
+        labels:
+          - harmonic
+      - isMatch: false
+        name: src
+      - isMatch: true
+        name: install
+      - isMatch: true
+        name: osx
+      - isMatch: true
+        labels:
+          - docs
+    dimensions:
+      os:
         - MacOS
       buildType:
         - Binary
